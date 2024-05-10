@@ -1,7 +1,12 @@
-# Evidencia_semanatec
-Evidencia final de la semana tec
+# Evidencia Semana Tec
 
 ## Angélica Ríos Cuentas - A01705651 
-## Actividad realizada: Pacman 
-La primera modificación que hice fue que los fantasmas se movieran más rápido. Esto se logró al modificar en la función move() la parte de ontimer(move, 100). Aqui se hacia un delay de 1 segundo por lo que lo cambie a ontimer(move, 10) para que disminuyera el tiempo de delay, haciendo que los fantasmas se movieran más rápido.
-La segunda modificación que realice fue el cambio del tablero para esto inverti los colores del tablero para que en vez de ser afuera negro y adentro azul  bgcolor('black') path.color('blue') se viera afuera azul y adentro negro bgcolor('blue') path.color('black'). Además modifiqué la matriz tiles que a través de 1 y 0 traza el mapa, para que tuviera una forma diferente a la original.
+### Actividad realizada: Pacman 
+
+En esta actividad realicé dos modificaciones importantes:
+
+1. **Velocidad de los fantasmas:** La primera modificación consistió en aumentar la velocidad de los fantasmas. Esto se logró modificando la función `move()`. Anteriormente, la línea `ontimer(move, 100)` establecía un retraso de 1 segundo entre movimientos. Cambié esto a `ontimer(move, 10)` para reducir el tiempo de retraso a 0.1 segundo, lo que provocó que los fantasmas se movieran más rápido.
+
+2. **Cambio en el diseño del tablero:** La segunda modificación implicó cambiar el diseño del tablero. Invertí los colores del tablero para que el exterior fuera azul y el interior negro, en lugar de la configuración original que era exterior negro e interior azul (`bgcolor('black')` y `path.color('blue')`). Además, ajusté la matriz `tiles`, que define el mapa a través de valores binarios (1 y 0), para que tuviera una forma diferente a la original.
+
+Estas modificaciones mejoraron la experiencia del juego y agregaron un toque personalizado al diseño del tablero.
