@@ -2,52 +2,56 @@
 from turtle import *
 from freegames import line
 
-# Define una función para dibujar la cuadrícula del juego de gato
-def grid():
-    # Dibuja líneas verticales de la cuadrícula
-    line(-67, 200, -67, -200)
-    line(67, 200, 67, -200)
-    # Dibuja líneas horizontales de la cuadrícula
-    line(-200, -67, 200, -67)
-    line(-200, 67, 200, 67)
 
-# Define la función para dibujar una 'X' en la posición (x, y)
+board = {}  # Diccionario que verifica el estado de cada cuadrícula
+
+# Función para dibujar la cuadrícula del juego
+def grid():
+    line(-67, 200, -67, -200) # Línea vertical izquierda
+    line(67, 200, 67, -200)   # Línea vertical derecha
+    line(-200, -67, 200, -67) # Línea horizontal inferior
+    line(-200, 67, 200, 67)   # Línea horizontal superior
+
+# Función para dibujar la letra X
 def drawx(x, y):
-    color('red')  # Establece el color del lápiz a rojo
+    color('red')  # Establece el color de X a rojo
     line(x + 17, y + 17, x + 117, y + 117)
     line(x + 17, y + 117, x + 117, y + 17)
 
-# Define la función para dibujar un 'O' en la posición (x, y)
+# Función para dibujar el círculo O
 def drawo(x, y):
-    color('blue')  # Establece el color del lápiz a azul
-    up()  # Levanta el lápiz para no dibujar mientras se mueve
+    color('blue')  # Establece el color de O a azul
+    up()
     goto(x + 67, y + 17)
     down()
-    circle(50)
+    circle(50)     # Dibuja el círculo con radio 62
 
-# Función para normalizar las coordenadas de los clics a la cuadrícula del juego
+# Función para redondear un valor hacia abajo al tamaño de la cuadrícula
 def floor(value):
     return ((value + 200) // 133) * 133 - 200
 
-# Estado inicial del juego, indicando quién es el jugador actual (0 = X, 1 = O)
-state = {'player': 0}
-players = [drawx, drawo]  # Lista de funciones de dibujo para cada jugador
+state = {'player': 0}     # Estado del jugador actual, 0 para X, 1 para O
+players = [drawx, drawo]  # Lista de funciones de dibujo para X y O
 
-# Función llamada en cada clic en la pantalla
+# Función que maneja el evento de clic en una posición del tablero
 def tap(x, y):
-    x = floor(x)  # Normaliza la coordenada x
-    y = floor(y)  # Normaliza la coordenada y
-    player = state['player']  # Obtiene el jugador actual
-    draw = players[player]  # Obtiene la función de dibujo del jugador actual
-    draw(x, y)  # Dibuja la marca en la posición clickeada
-    update()  # Actualiza la pantalla de turtle
-    state['player'] = not player  # Cambia el jugador
+    x = floor(x)
+    y = floor(y)
+    key = (x, y)
+    if key in board:  # Verifica si la casilla está ocupada
+        return        # Si está ocupada, no hace nada
+    board[key] = state['player']  # Marca la casilla como ocupada
+    player = state['player']
+    draw = players[player]
+    draw(x, y)       # Dibuja la marca del jugador en la casilla
+    update()         # Actualiza la pantalla
+    state['player'] = not player  # Cambia al siguiente jugador
 
-# Configura la ventana del juego
-setup(420, 420, 370, 0)
-hideturtle()  # Oculta la tortuga para que no se vea en la ventana
-tracer(False)  # Desactiva la animación de turtle para dibujar instantáneamente
-grid()  # Dibuja la cuadrícula del juego
-update()  # Actualiza la pantalla
-onscreenclick(tap)  # Establece la función 'tap' como handler de clics en la pantalla
-done()  # Inicia el bucle de eventos de turtle
+# Configuración inicial de la pantalla
+setup(420, 420, 370, 0)  # Configura el tamaño y posición inicial de la ventana
+hideturtle()              # Oculta la tortuga
+tracer(False)             # Desactiva la animación para dibujar instantáneamente
+grid()                    # Dibuja la cuadrícula del juego
+update()                  # Actualiza la pantalla
+onscreenclick(tap)        # Establece la función 'tap' como manejador de clics en la pantalla
+done()                    # Finaliza el bucle de eventos de turtle
