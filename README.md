@@ -23,3 +23,9 @@ función 'tap()' se crea una llave que representa la casilla en la que se ha
 hecho click y valida que no esté dicha llave en el diccionario. En caso de
 no estar se actualiza el diccionario, en caso de estar ocupada no regresa
 ninguna salida.
+
+Asimismo, durante la realización de la entrega se estuvo haciendo control de
+versiones con git, utilizando los comandos como git add -A, git commit -m,
+git push, git pull, etc. Por último, mediante la isntalación y suo de la 
+herramienta Flake8 se validó que el código de TicTacToe.py cumpliera con los
+estándares de PEP8.
